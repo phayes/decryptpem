@@ -37,3 +37,19 @@ if err != nil {
   log.Fatal(err)
 }
 ```
+
+## Configuration
+
+There are two configuration variables provided:
+
+```go
+// PasswordDelay sets the delay for any password tries and retries as a defence against brute force password guessing
+// By default there is no delay
+decryptpem.PasswordDelay time.Duration
+
+// MaxTries sets the maximum number of times a password may be tried before erroring out.
+// A MaxTries of 1 means that there is only one try allowed (no retries)
+// A MaxTries of 0 means infinite retries are allowed.
+// When tries run out, an error of x509.IncorrectPasswordError will be returned.
+decryptpem.MaxTries int
+```
