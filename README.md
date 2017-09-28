@@ -4,11 +4,6 @@ Golang package that decrypts encrypted PEM files and blocks. Provides (optional)
 
 ## Example
 ```go
-
-
-
-```
-
 // Get private key, prompt for password and decrypt if necessary
 pem, err := decryptpem.DecryptFileWithPrompt("/path/to/private_key.pem")
 if err != nil {
