@@ -94,6 +94,9 @@ func DecryptBytesWithPassword(pembytes []byte, password string) (block *pem.Bloc
 	// It's encrypted, decrypt it
 	der, err := x509.DecryptPEMBlock(block, []byte(password))
 	if err != nil {
+		if errors.IsA(err, x509.IncorrectPasswordError) {
+			return nil, rest, err
+		}
 		return nil, rest, errors.Wrap(err, ErrDecryptBlock)
 	}
 
@@ -134,6 +137,8 @@ func DecryptBytesWithPrompt(pembytes []byte, prompt string, incorrectMessage str
 		if err != nil {
 			return nil, rest, err
 		}
+		// Print a linebreak to make the password return feel natural
+		fmt.Println("")
 
 		block, rest, err = DecryptBytesWithPassword(pembytes, password)
 		if err != nil {
@@ -142,7 +147,7 @@ func DecryptBytesWithPrompt(pembytes []byte, prompt string, incorrectMessage str
 				if MaxTries != 0 && tries >= MaxTries {
 					return nil, rest, err
 				} else {
-					fmt.Println("\n" + incorrectMessage)
+					fmt.Println(incorrectMessage)
 					tries++
 					continue
 				}
