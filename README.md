@@ -13,4 +13,15 @@ privateKey, err := x509.ParsePKCS1PrivateKey(pem.Bytes());
 if err != nil {
   log.Fatal(err)
 }
+
+
+// It will also work with unencrypted plaintext PEM files
+pem, err := decryptpem.DecryptFileWithPrompt("/path/to/plaintext_key.pem") // Will not prompt for pasword.
+if err != nil {
+  log.Fatal(err)
+}
+privateKey, err := x509.ParsePKCS1PrivateKey(pem.Bytes());
+if err != nil {
+  log.Fatal(err)
+}
 ```
