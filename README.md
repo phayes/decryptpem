@@ -1,4 +1,4 @@
-# decryptpem
+# Decrypt PEM
 
 Golang package that decrypts encrypted PEM files and blocks. Provides (optional) TTY prompt for input for password. 
 
