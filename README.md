@@ -2,6 +2,12 @@
 
 Golang package that decrypts encrypted PEM files and blocks. Provides (optional) TTY prompt for input for password. 
 
+## Installation
+
+```
+go get github.com/phayes/decryptpem
+```
+
 ## Example
 ```go
 // Get private key, prompt for password and decrypt if necessary
